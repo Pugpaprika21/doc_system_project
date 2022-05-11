@@ -1,0 +1,36 @@
+<?php
+
+    class A {
+        //
+        public function Hello(): void {
+            echo "Hello";
+        }
+    }
+    
+    class B {
+        //
+        public $propA = null;
+        public function __construct() {
+            $this->propA = new A();
+        }
+        //
+        public function call_A(): B {
+            $this->propA->Hello();
+            return $this; 
+        }
+        public function myName(string $name, callable $callback): void {
+            echo " ".$name. " ".$callback();
+        }
+    }
+    
+    $b1 = new B();
+    $b1->call_A()->myName("Pug", function(): void {
+        echo " eieie";
+    });
+    //
+    $b2 = new B();
+    $b2->call_A()->myName("Pug", function(): void {
+        echo " rqerqer";
+    });
+
+?>

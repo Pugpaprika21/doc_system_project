@@ -1,0 +1,14 @@
+body {
+    font-family: 'Mitr', sans-serif;
+}
+.card {
+    margin-top: 80px;
+}
+
+a:hover {
+    color: burlywood;
+}
+
+#btn-submit {
+    width: 100%;
+}

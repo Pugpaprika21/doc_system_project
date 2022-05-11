@@ -1,0 +1,19 @@
+body {
+    font-family: 'Mitr', sans-serif;
+}
+
+.card {
+    margin-top: 25px;
+}
+
+#btn-submit {
+    width: 100%;
+}
+
+label {
+    margin-top: 10px;
+}
+
+img {
+    border-radius: 50%;
+}

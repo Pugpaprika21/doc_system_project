@@ -1,0 +1,47 @@
+1) INSERT query with named placeholders
+
+$data = [
+    'name' => $name,
+    'surname' => $surname,
+    'sex' => $sex,
+];
+$sql = "INSERT INTO users (name, surname, sex) VALUES (:name, :surname, :sex)";
+$stmt= $pdo->prepare($sql);
+$stmt->execute($data);
+
+$data = [
+    ['John','Doe', 22],
+    ['Jane','Roe', 19],
+];
+$stmt = $pdo->prepare("INSERT INTO users (name, surname, age) VALUES (?,?,?)");
+try {
+    $pdo->beginTransaction();
+    foreach ($data as $row)
+    {
+        $stmt->execute($row);
+    }
+    $pdo->commit();
+}catch (Exception $e){
+    $pdo->rollback();
+    throw $e;
+}
+
+2) Selecting multiple rows
+
+$stmt = $pdo->prepare("SELECT * FROM users LIMIT :limit, :offset");
+$stmt->execute(['limit' => $limit, 'offset' => $offset]); 
+$data = $stmt->fetchAll();
+// and somewhere later:
+foreach ($data as $row) {
+    echo $row['name']."<br />\n";
+}
+
+3) UPDATE query with named placeholders
+
+$sql = "UPDATE users SET name=:name, surname=:surname, sex=:sex WHERE id=:id";
+$pdo->prepare($sql)->execute($data);
+
+4) DELETE query with named placeholders
+
+$sql = "DELETE FROM coupons WHERE used = :used AND date_active < :date";
+$pdo->prepare($sql)->execute($data);
